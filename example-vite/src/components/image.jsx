@@ -1,33 +1,27 @@
-// ReactJS component displaying responsive images.
+// React component displaying an image.
+
 import React from 'react';
 import PropTypes from 'prop-types';
 
-// Image component.
-function Image({ src, alt, width, className }) {
+// imgData: object with the following properties:
+//
+
+export const Image = ({ imgData, folder, type, alt }) => {
   return (
     <img
-      src={src}
-      alt={alt}
-      width={width}
-      className={className} />
+      src={'${folder}/${imgData.root}.${type}'}
+      width={imgData.width}
+      height={imgData.height}
+      alt={alt || ''}
+    />
   );
+};
 
-  // Image component properties.
-  Image.propTypes = {
-    src: PropTypes.string.isRequired,
-    alt: PropTypes.string.isRequired,
-    width: PropTypes.string.isRequired,
-    className: PropTypes.string.isRequired
-  };
+Image.propTypes = {
+  imgData: PropTypes.object.isRequired,
+  folder: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  alt: PropTypes.string,
+};
 
-  // Image component default properties.
-  Image.defaultProps = {
-    src: '',
-    alt: '',
-    width: '100%',
-    className: ''
-  };
-
-  // Return Image component.
-  return Image;
-}
+export default Image;
